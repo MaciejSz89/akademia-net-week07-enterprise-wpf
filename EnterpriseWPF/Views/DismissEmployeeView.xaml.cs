@@ -1,4 +1,4 @@
-﻿using EmployeesWPF.ViewModels;
+﻿using EnterpriseWPF.ViewModels;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace EmployeesWPF.Views
+namespace EnterpriseWPF.Views
 {
     /// <summary>
     /// Interaction logic for DismissEmployeeView.xaml

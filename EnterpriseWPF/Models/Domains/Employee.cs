@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeesWPF.Models.Domains
+namespace EnterpriseWPF.Models.Domains
 {
     public class Employee
     {

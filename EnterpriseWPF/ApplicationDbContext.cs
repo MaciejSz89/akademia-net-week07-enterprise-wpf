@@ -1,21 +1,21 @@
-using EmployeesWPF.Models.Configurations;
-using EmployeesWPF.Models.Domains;
+using EnterpriseWPF.Models.Configurations;
+using EnterpriseWPF.Models.Domains;
 using System;
 using System.Data.Entity;
 using System.Linq;
 
-namespace EmployeesWPF
+namespace EnterpriseWPF
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
-            : base("name=EmployeesDataContext")
+            : base(_connectionString)
         {
             
         }
+        private static string _connectionString = new ConnectionSettings().ConnectionString;
 
-
-         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

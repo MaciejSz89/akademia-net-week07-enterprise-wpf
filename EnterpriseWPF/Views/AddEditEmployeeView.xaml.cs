@@ -1,4 +1,5 @@
-﻿using EmployeesWPF.ViewModels;
+﻿using EnterpriseWPF.Models.Domains;
+using EnterpriseWPF.ViewModels;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace EmployeesWPF.Views
+namespace EnterpriseWPF.Views
 {
     /// <summary>
     /// Interaction logic for AddEditEmployee.xaml
     /// </summary>
     public partial class AddEditEmployeeView : MetroWindow
     {
-        public AddEditEmployeeView()
+        public AddEditEmployeeView(Employee employee)
         {
             InitializeComponent();
-            DataContext = new AddEditEmployeeViewModel();
+            DataContext = new AddEditEmployeeViewModel(employee);
         }
     }
 }

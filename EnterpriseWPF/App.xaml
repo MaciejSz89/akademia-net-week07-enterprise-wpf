@@ -1,9 +1,9 @@
-﻿<Application x:Class="EmployeesWPF.App"
+﻿<Application x:Class="EnterpriseWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:EmployeesWPF"
+             xmlns:local="clr-namespace:EnterpriseWPF"
 
-             StartupUri="Views/AddEditEmployeeView.xaml">
+             StartupUri="Views/MainWindowView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

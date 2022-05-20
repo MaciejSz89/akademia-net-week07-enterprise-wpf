@@ -1,0 +1,85 @@
+﻿<mah:MetroWindow x:Class="EnterpriseWPF.Views.ConnectionSettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                 
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:parent="clr-namespace:EnterpriseWPF"       
+        xmlns:local="clr-namespace:EnterpriseWPF.Views" 
+        mc:Ignorable="d"
+        Name="ConnectionStringWindow"
+        WindowStartupLocation="CenterScreen"
+        Title="ConnectionSettingsView" Height="260" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Adres serwera:" Margin="5"/>
+        <TextBox Grid.Column="1" Margin="5" 
+                 Text="{Binding ConnectionSettings.ServerAddress, 
+                        UpdateSourceTrigger=PropertyChanged, 
+                        ValidatesOnDataErrors=True}"/>
+
+        <Label Grid.Row="1"  Content="Nazwa serwera:" Margin="5"/>
+        <TextBox Grid.Row="1" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding ConnectionSettings.ServerName, 
+                        UpdateSourceTrigger=PropertyChanged, 
+                        ValidatesOnDataErrors=True}"/>
+        
+        <Label Grid.Row="2" Content="Baza danych:" Margin="5"/>
+        <TextBox Grid.Row="2" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding ConnectionSettings.DatabaseName, 
+                        UpdateSourceTrigger=PropertyChanged, 
+                        ValidatesOnDataErrors=True}"/>
+
+        <Label Grid.Row="3" Content="Użytkownik:" Margin="5"/>
+        <TextBox Grid.Row="3" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding ConnectionSettings.UserId, 
+                        UpdateSourceTrigger=PropertyChanged, 
+                        ValidatesOnDataErrors=True}"/>
+
+        <Label Grid.Row="4" Content="Hasło:" Margin="5"/>
+        <PasswordBox parent:PasswordHelper.Attach="True" 
+                        parent:PasswordHelper.Password="{Binding ConnectionSettings.Password,                                              
+                        Mode=TwoWay,                                             
+                        UpdateSourceTrigger=PropertyChanged,                                            
+                        ValidatesOnDataErrors=True}"                                             
+                        Grid.Row="4" 
+                        Grid.Column="1" 
+                        Margin="5"/>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
+            <Button 
+                Command="{Binding CloseCommand}"                
+                CommandParameter="{Binding ElementName=ConnectionStringWindow}"
+                Content="Anuluj" 
+                Height="25" 
+                Width="100" 
+                Margin="5"/>
+            <Button 
+                Command="{Binding ConfirmCommand}"
+                CommandParameter="{Binding ElementName=ConnectionStringWindow}"
+                Content="Zatwierdź" 
+                Height="25" 
+                Width="100" 
+                Margin="5"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

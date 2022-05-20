@@ -1,12 +1,19 @@
-﻿<mah:MetroWindow x:Class="EmployeesWPF.Views.MainWindowView"
+﻿<mah:MetroWindow x:Class="EnterpriseWPF.Views.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeesWPF.Views"
+        xmlns:local="clr-namespace:EnterpriseWPF.Views"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d"
+        mc:Ignorable="d"                 
+        WindowStartupLocation="CenterScreen"
         Title="Pracownicy" Height="450" Width="800" MinHeight="450" MinWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,29 +21,61 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Menu">
-                <MenuItem Header="Zatrudnienie nowego pracownika" Command="{Binding AddEditEmployeeCommand}"/>
-                <MenuItem Header="Edycja danych pracownika"  Command="{Binding AddEditEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}" Visibility="{Binding IsEmployeeSelected}"/>
-                <MenuItem Header="Zwolnienie pracownika" Command="{Binding DismissEmployee}" />
+                <MenuItem Header="Zatrudnienie nowego pracownika" 
+                          Command="{Binding AddEmployeeCommand}"/>
+                <MenuItem Header="Edycja danych pracownika"  
+                          Command="{Binding EditEmployeeCommand}"/>
+                <MenuItem Header="Zwolnienie pracownika" 
+                          Command="{Binding DismissEmployeeCommand}" 
+                          Visibility="{Binding IsEmployeeSelected}"/>
+                <Separator/>
+                <MenuItem Header="Ustawienia"/>
             </MenuItem>
         </Menu>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" >
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding Employees}"   
+                  AutoGenerateColumns="False"   
+                  IsReadOnly="True"   
+                  SelectionMode="Single"   
+                  SelectedItem="{Binding SelectedEmployee}" >  
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Zatrudnienie nowego pracownika" Command="{Binding AddEditEmployeeCommand}"/>
-                    <MenuItem Header="Edycja danych pracownika"  Command="{Binding AddEditEmployeeCommand}" CommandParameter="{Binding SelectedEmployee}" Visibility="{Binding IsEmployeeSelected}"/>
-                    <MenuItem Header="Zwolnienie pracownika" Command="{Binding DismissEmployee}" />
+                    <MenuItem Header="Zatrudnienie nowego pracownika" 
+                              Command="{Binding AddEmployeeCommand}"/>
+                    <MenuItem Header="Edycja danych pracownika"  
+                              Command="{Binding EditEmployeeCommand}"/>
+                    <MenuItem Header="Zwolnienie pracownika" 
+                              Command="{Binding DismissEmployeeCommand}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="Auto"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="Auto"/>
-                <DataGridTextColumn Header="Pensja" Binding="{Binding Salary, StringFormat={}{0:C}, ConverterCulture='pl-PL'}"  Width="Auto"/>
-                <DataGridTextColumn Header="Uwagi" Binding="{Binding Comments}" Width="*"/>
-                <DataGridTextColumn Header="Data zatrudnienia" Binding="{Binding HireDate}" Width="Auto"/>
-                <DataGridCheckBoxColumn Header="Zatrudnony" Binding="{Binding IsHired}" Width="Auto"/>
-                <DataGridTextColumn Header="Data zwolnienia" Binding="{Binding DismissalDate}" Width="Auto"/>
+                <DataGridTextColumn Header="ID" 
+                                    Binding="{Binding Id}" 
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="Imię" 
+                                    Binding="{Binding FirstName}" 
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="Nazwisko" 
+                                    Binding="{Binding LastName}"
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="Pensja" 
+                                    Binding="{Binding Salary, StringFormat={}{0:C}, ConverterCulture='pl-PL'}"  
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="Uwagi" 
+                                    Binding="{Binding Comments}" 
+                                    Width="*"/>
+                <DataGridTextColumn Header="Data zatrudnienia" 
+                                    Binding="{Binding HireDate}" 
+                                    Width="Auto"/>
+                <DataGridCheckBoxColumn Header="Zatrudnony" 
+                                        Binding="{Binding IsHired}" 
+                                        Width="Auto"/>
+                <DataGridTextColumn Header="Data zwolnienia" 
+                                    Binding="{Binding DismissalDate}" 
+                                    Width="Auto"/>
             </DataGrid.Columns>
+            
+            
         </DataGrid>
     </Grid>
 </mah:MetroWindow>

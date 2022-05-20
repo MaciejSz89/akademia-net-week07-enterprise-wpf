@@ -1,4 +1,4 @@
-﻿using EmployeesWPF.Models.Domains;
+﻿using EnterpriseWPF.Models.Domains;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeesWPF.Models.Configurations
+namespace EnterpriseWPF.Models.Configurations
 {
     public class EmployeeConfiguration : EntityTypeConfiguration<Employee>
     {

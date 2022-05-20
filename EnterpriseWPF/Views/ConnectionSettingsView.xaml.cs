@@ -2,7 +2,6 @@
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,24 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EnterpriseWPF.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ConnectionSettingsView.xaml
     /// </summary>
-    public partial class MainWindowView : MetroWindow
+    public partial class ConnectionSettingsView : MetroWindow
     {
-        public MainWindowView()
+        public ConnectionSettingsView(bool canCloseWindow)
         {
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
-            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pl-PL");
-
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
-            
+            DataContext = new ConnectionSettingsViewModel(canCloseWindow);
         }
     }
 }

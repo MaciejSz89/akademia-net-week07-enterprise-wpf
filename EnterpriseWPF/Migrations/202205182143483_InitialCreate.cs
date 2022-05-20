@@ -1,4 +1,4 @@
-﻿namespace EmployeesWPF.Migrations
+﻿namespace EnterpriseWPF.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
