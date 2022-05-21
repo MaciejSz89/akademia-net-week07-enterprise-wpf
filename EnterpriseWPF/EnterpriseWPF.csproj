@@ -80,6 +80,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="ConnectionSettings.cs" />
+    <Compile Include="InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Migrations\202205182143483_InitialCreate.cs" />
     <Compile Include="Migrations\202205182143483_InitialCreate.designer.cs">
       <DependentUpon>202205182143483_InitialCreate.cs</DependentUpon>
@@ -101,6 +102,7 @@
     <Compile Include="Models\Domains\Employee.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="PasswordBoxHelper.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModels\ConnectionSettingsViewModel.cs" />
     <Compile Include="ViewModels\DismissEmployeeViewModel.cs" />

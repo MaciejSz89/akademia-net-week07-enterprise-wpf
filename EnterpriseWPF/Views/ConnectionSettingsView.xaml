@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Name="ConnectionStringWindow"
         WindowStartupLocation="CenterScreen"
-        Title="ConnectionSettingsView" Height="260" Width="400">
+        Title="Ustawienia połączenia" Height="260" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -9,16 +9,17 @@ namespace EnterpriseWPF.Models.Domains
 {
     public class Employee
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
         [Column(TypeName = "money")]
         public decimal Salary { get; set; }
-        public DateTime HireDate { get; set; }
+        public DateTime HireDate { get; set; } = DateTime.Now;
         public DateTime? DismissalDate { get; set; }
         public string Comments { get; set; }
-        public bool IsHired { get; set; }
+        public bool IsHired { get; set; } = true;
+
 
 
     }

@@ -24,12 +24,15 @@
                 <MenuItem Header="Zatrudnienie nowego pracownika" 
                           Command="{Binding AddEmployeeCommand}"/>
                 <MenuItem Header="Edycja danych pracownika"  
-                          Command="{Binding EditEmployeeCommand}"/>
+                          Command="{Binding EditEmployeeCommand}"
+                          CommandParameter="{Binding SelectedEmployee}"/>
                 <MenuItem Header="Zwolnienie pracownika" 
                           Command="{Binding DismissEmployeeCommand}" 
+                          CommandParameter="{Binding SelectedEmployee}"
                           Visibility="{Binding IsEmployeeSelected}"/>
                 <Separator/>
-                <MenuItem Header="Ustawienia"/>
+                <MenuItem Header="Ustawienia"
+                          Command="{Binding ConnectionSettingsCommand}"/>
             </MenuItem>
         </Menu>
         <DataGrid Grid.Row="1" 
@@ -43,15 +46,23 @@
                     <MenuItem Header="Zatrudnienie nowego pracownika" 
                               Command="{Binding AddEmployeeCommand}"/>
                     <MenuItem Header="Edycja danych pracownika"  
-                              Command="{Binding EditEmployeeCommand}"/>
+                              Command="{Binding EditEmployeeCommand}"
+                              CommandParameter="{Binding SelectedEmployee}"/>
                     <MenuItem Header="Zwolnienie pracownika" 
-                              Command="{Binding DismissEmployeeCommand}" />
+                              Command="{Binding DismissEmployeeCommand}"
+                              CommandParameter="{Binding SelectedEmployee}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" 
                                     Binding="{Binding Id}" 
-                                    Width="Auto"/>
+                                    Width="Auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Imię" 
                                     Binding="{Binding FirstName}" 
                                     Width="Auto"/>
@@ -60,19 +71,38 @@
                                     Width="Auto"/>
                 <DataGridTextColumn Header="Pensja" 
                                     Binding="{Binding Salary, StringFormat={}{0:C}, ConverterCulture='pl-PL'}"  
-                                    Width="Auto"/>
-                <DataGridTextColumn Header="Uwagi" 
-                                    Binding="{Binding Comments}" 
-                                    Width="*"/>
+                                    Width="Auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
                 <DataGridTextColumn Header="Data zatrudnienia" 
-                                    Binding="{Binding HireDate}" 
-                                    Width="Auto"/>
+                                    Binding="{Binding HireDate, StringFormat='dd MMM yyyy', ConverterCulture='pl-PL'}" 
+                                    Width="Auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridCheckBoxColumn Header="Zatrudnony" 
                                         Binding="{Binding IsHired}" 
                                         Width="Auto"/>
                 <DataGridTextColumn Header="Data zwolnienia" 
                                     Binding="{Binding DismissalDate}" 
-                                    Width="Auto"/>
+                                    Width="Auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Uwagi" 
+                                    Binding="{Binding Comments}" 
+                                    Width="*"/>
             </DataGrid.Columns>
             
             

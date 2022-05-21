@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnterpriseWPF.ViewModels
 {
-    internal class DismissEmployeeViewModel
+    public class DismissEmployeeViewModel
     {
     }
 }

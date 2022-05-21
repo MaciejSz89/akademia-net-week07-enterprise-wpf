@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:main="clr-namespace:EnterpriseWPF" 
         xmlns:local="clr-namespace:EnterpriseWPF.Views"        
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Name="AddEditEmployeeWindow"                 
         WindowStartupLocation="CenterScreen"
-        Title="Edycja danych pracownika" Height="450" Width="400" MinHeight="450" MinWidth="400" MaxHeight="450" MaxWidth="400">
+        Title="Dane pracownika" Height="450" Width="400" MinHeight="450" MinWidth="400" MaxHeight="450" MaxWidth="400">
+    <mah:MetroWindow.Resources>
+        <main:InverseBooleanToVisibilityConverter x:Key="inverseBooleanToVisibilityConverter" />
+    </mah:MetroWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,32 +30,90 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Margin="5" Content="Id:"/>
-        <TextBox Grid.Column="1" Margin="5" Text="{Binding Employee.Id}"/>
+        <Label Margin="5" 
+               Content="Id:"
+               Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBox Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding Employee.Id}"
+                 Visibility="{Binding IsUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Label Grid.Row="1" Margin="5" Content="Imię:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Employee.FirstName}"/>
+        <Label Grid.Row="1" 
+               Margin="5" 
+               Content="Imię:"/>
+        <TextBox Grid.Row="1" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding Employee.FirstName}"/>
 
-        <Label Grid.Row="2" Margin="5" Content="Nazwisko:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Employee.LastName}"/>
+        <Label Grid.Row="2" 
+               Margin="5" 
+               Content="Nazwisko:"/>
+        <TextBox Grid.Row="2" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding Employee.LastName}"/>
         
-        <Label Grid.Row="3" Margin="5" Content="Pensja:"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Employee.Salary, StringFormat={}{0:C}, ConverterCulture='pl-PL'}"/>
+        <Label Grid.Row="3" 
+               Margin="5" 
+               Content="Pensja:"/>
+        <TextBox Grid.Row="3" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding Employee.Salary, 
+                            StringFormat={}{0:C}, 
+                            ConverterCulture='pl-PL'}"/>
 
-        <Label Grid.Row="4" Margin="5" Content="Uwagi:"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Employee.Comments}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        <Label Grid.Row="4" 
+               Margin="5" 
+               Content="Uwagi:"/>
+        <TextBox Grid.Row="4" 
+                 Grid.Column="1" 
+                 Margin="5" 
+                 Text="{Binding Employee.Comments}" 
+                 TextWrapping="Wrap" 
+                 VerticalScrollBarVisibility="Auto" />
 
-        <Label Grid.Row="5" Margin="5" Content="Data ztrudnienia:"/>
-        <DatePicker Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding Employee.HireDate}"/>
+        <Label Grid.Row="5" 
+               Margin="5" 
+               Content="Data ztrudnienia:"/>
+        <DatePicker Grid.Row="5" 
+                    Grid.Column="1" 
+                    Margin="5" 
+                    Text="{Binding Employee.HireDate}"/>
 
-        <Label Grid.Row="6" Margin="5" Content="Data zwolnienia:"/>
-        <DatePicker Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding Employee.DismissalDate}"/>
+        <Label Grid.Row="6" 
+               Margin="5" 
+               Content="Data zwolnienia:"
+               Visibility="{Binding Employee.IsHired, Converter={StaticResource inverseBooleanToVisibilityConverter}}"/>
+        <DatePicker Grid.Row="6" 
+                    Grid.Column="1" 
+                    Margin="5" 
+                    Text="{Binding Employee.DismissalDate}"
+                    Visibility="{Binding Employee.IsHired, Converter={StaticResource inverseBooleanToVisibilityConverter}}"/>
 
-        <CheckBox Grid.Row="7" Grid.Column="1" Margin="5" Content="Zatrudniony" IsChecked="{Binding Employee.IsHired}"/>
+        <CheckBox Grid.Row="7" 
+                  Grid.Column="1" 
+                  Margin="5" 
+                  Content="Zatrudniony" 
+                  IsChecked="{Binding Employee.IsHired}"
+                  Name="IsHiredCheckBox"
+                  Command="{Binding IsHiredChangedCommand}"/>
 
-        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5" Content="Zatwierdź" Width="130"/>
-            <Button Margin="5" Content="Anuluj" Width="130"/>
+        <StackPanel Grid.Row="8" 
+                    Grid.Column="1" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button Margin="5" 
+                    Content="Zatwierdź" 
+                    Command="{Binding ConfirmCommand}"
+                    CommandParameter="{Binding ElementName=AddEditEmployeeWindow}"
+                    Width="130"/>
+            <Button Margin="5" 
+                    Content="Anuluj"                     
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=AddEditEmployeeWindow}"
+                    Width="130"/>
         </StackPanel>
         
     </Grid>

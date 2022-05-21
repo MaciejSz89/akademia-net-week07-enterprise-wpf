@@ -26,6 +26,7 @@ namespace EnterpriseWPF.ViewModels
             AddEmployeeCommand = new RelayCommand(AddEditEmployee);
             EditEmployeeCommand = new RelayCommand(AddEditEmployee, CanEditEmployee);
             DismissEmployeeCommand = new AsyncRelayCommand(DismissEmployee, CanDismissEmployee);
+            ConnectionSettingsCommand = new RelayCommand(ConnectionSettings);
         }
 
 
@@ -50,6 +51,7 @@ namespace EnterpriseWPF.ViewModels
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand EditEmployeeCommand { get; set; }
         public ICommand DismissEmployeeCommand { get; set; }
+        public ICommand ConnectionSettingsCommand { get; set; }
 
         public ObservableCollection<Employee> Employees
         {
@@ -98,7 +100,13 @@ namespace EnterpriseWPF.ViewModels
         private void AddEditEmployee(object obj)
         {
             var addEditEmployeeView = new AddEditEmployeeView(obj as Employee);
+            addEditEmployeeView.Closed += AddEditEmployeeView_Closed;
             addEditEmployeeView.ShowDialog();
+        }
+
+        private void AddEditEmployeeView_Closed(object sender, EventArgs e)
+        {
+            RefreshData();
         }
 
         private async void LoadedWindow(object obj)
@@ -109,8 +117,7 @@ namespace EnterpriseWPF.ViewModels
                 var dialog = await metroWindow.ShowMessageAsync("Nie można nawiązać połączenia z bazą danych", "Czy chcesz poprawić ustawienia połączenia?", MessageDialogStyle.AffirmativeAndNegative);
                 if (dialog == MessageDialogResult.Affirmative)
                 {
-                    var connectionSettingsView = new ConnectionSettingsView(false);
-                    connectionSettingsView.ShowDialog();
+                    OpenConnectionSettings();
                 }
                 else if (dialog == MessageDialogResult.Negative)
                 {
@@ -123,6 +130,19 @@ namespace EnterpriseWPF.ViewModels
             }
 
         }
+
+        private void ConnectionSettings(object obj)
+        {
+            OpenConnectionSettings();
+        }
+
+        private void OpenConnectionSettings()
+        {
+            var connectionSettingsView = new ConnectionSettingsView(false);
+            connectionSettingsView.ShowDialog();
+        }
+
+        
 
     }
 }
