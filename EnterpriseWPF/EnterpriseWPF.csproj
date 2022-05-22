@@ -99,8 +99,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\EmployeeConfiguration.cs" />
+    <Compile Include="Models\Converters\EmployeeConverter.cs" />
     <Compile Include="Models\Domains\Employee.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Models\Wrappers\EmployeeWrapper.cs" />
     <Compile Include="PasswordBoxHelper.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
@@ -168,8 +170,6 @@
       <Version>2.4.9</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Wrappers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

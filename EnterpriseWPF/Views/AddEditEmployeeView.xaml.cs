@@ -1,4 +1,4 @@
-﻿using EnterpriseWPF.Models.Domains;
+﻿using EnterpriseWPF.Models.Wrappers;
 using EnterpriseWPF.ViewModels;
 using MahApps.Metro.Controls;
 using System;
@@ -22,7 +22,7 @@ namespace EnterpriseWPF.Views
     /// </summary>
     public partial class AddEditEmployeeView : MetroWindow
     {
-        public AddEditEmployeeView(Employee employee)
+        public AddEditEmployeeView(EmployeeWrapper employee)
         {
             InitializeComponent();
             DataContext = new AddEditEmployeeViewModel(employee);

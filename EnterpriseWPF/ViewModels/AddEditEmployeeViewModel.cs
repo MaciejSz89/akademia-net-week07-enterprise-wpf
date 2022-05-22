@@ -1,5 +1,5 @@
 ﻿using EnterpriseWPF.Commands;
-using EnterpriseWPF.Models.Domains;
+using EnterpriseWPF.Models.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +12,15 @@ namespace EnterpriseWPF.ViewModels
 {
     public class AddEditEmployeeViewModel : ViewModelBase
     {
-        public AddEditEmployeeViewModel(Employee employee = null)
+        public AddEditEmployeeViewModel(EmployeeWrapper employee = null)
         {
             if (employee == null)
             {
-                Employee = new Employee();
+                Employee = new EmployeeWrapper
+                {
+                    HireDate = DateTime.Now,
+                    IsHired = true                    
+                };
             }
             else
             {
@@ -37,9 +41,9 @@ namespace EnterpriseWPF.ViewModels
         private Repository _repository = new Repository();
 
 
-        private Employee _employee;
+        private EmployeeWrapper _employee;
 
-        public Employee Employee
+        public EmployeeWrapper Employee
         {
             get
             {
@@ -106,9 +110,6 @@ namespace EnterpriseWPF.ViewModels
             var window = obj as Window;
             CloseWindow(window);
         }
-
-
-
 
     }
 }

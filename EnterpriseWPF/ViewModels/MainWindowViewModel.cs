@@ -1,5 +1,5 @@
 ﻿using EnterpriseWPF.Commands;
-using EnterpriseWPF.Models.Domains;
+using EnterpriseWPF.Models.Wrappers;
 using EnterpriseWPF.ViewModels;
 using EnterpriseWPF.Views;
 using MahApps.Metro.Controls;
@@ -25,7 +25,7 @@ namespace EnterpriseWPF.ViewModels
             LoadedWindowCommand = new RelayCommand(LoadedWindow);
             AddEmployeeCommand = new RelayCommand(AddEditEmployee);
             EditEmployeeCommand = new RelayCommand(AddEditEmployee, CanEditEmployee);
-            DismissEmployeeCommand = new AsyncRelayCommand(DismissEmployee, CanDismissEmployee);
+            DismissEmployeeCommand = new RelayCommand(DismissEmployee, CanDismissEmployee);
             ConnectionSettingsCommand = new RelayCommand(ConnectionSettings);
         }
 
@@ -33,11 +33,12 @@ namespace EnterpriseWPF.ViewModels
 
         private ConnectionSettings _connectionSettings;
 
-        private ObservableCollection<Employee> _employees;
+        private ObservableCollection<EmployeeWrapper> _employees;
 
-        private Employee _selectedEmployee;
+        private EmployeeWrapper _selectedEmployee;
+        private Repository _repository = new Repository();
 
-        public Employee SelectedEmployee
+        public EmployeeWrapper SelectedEmployee
         {
             get { return _selectedEmployee; }
             set
@@ -53,7 +54,7 @@ namespace EnterpriseWPF.ViewModels
         public ICommand DismissEmployeeCommand { get; set; }
         public ICommand ConnectionSettingsCommand { get; set; }
 
-        public ObservableCollection<Employee> Employees
+        public ObservableCollection<EmployeeWrapper> Employees
         {
             get
             {
@@ -66,16 +67,15 @@ namespace EnterpriseWPF.ViewModels
             }
         }
 
-        private async Task DismissEmployee(object obj)
+        private void DismissEmployee(object obj)
         {
-            var metroWindow = Application.Current.MainWindow as MetroWindow;
-            var dialog = await metroWindow.ShowMessageAsync("Zwolnienie pracownika", $"Czy na pewno chcesz zwolnić pracownika {SelectedEmployee.FirstName} {SelectedEmployee.LastName}?", MessageDialogStyle.AffirmativeAndNegative);
-            if (dialog != MessageDialogResult.Affirmative)
-                return;
+            var dismissEmployeeView = new DismissEmployeeView(obj as EmployeeWrapper);
+            dismissEmployeeView.Closed += DismissEmployeeView_Closed;
+            dismissEmployeeView.ShowDialog();
+        }
 
-
-            //_repository.DeleteStudent(SelectedStudent.Id);
-
+        private void DismissEmployeeView_Closed(object sender, EventArgs e)
+        {
             RefreshData();
         }
 
@@ -83,7 +83,7 @@ namespace EnterpriseWPF.ViewModels
         {
             using (var dataContext = new ApplicationDbContext())
             {
-                Employees = new ObservableCollection<Employee>(dataContext.Employees.ToList());
+                Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees());
             }
         }
 
@@ -99,7 +99,7 @@ namespace EnterpriseWPF.ViewModels
 
         private void AddEditEmployee(object obj)
         {
-            var addEditEmployeeView = new AddEditEmployeeView(obj as Employee);
+            var addEditEmployeeView = new AddEditEmployeeView(obj as EmployeeWrapper);
             addEditEmployeeView.Closed += AddEditEmployeeView_Closed;
             addEditEmployeeView.ShowDialog();
         }
@@ -142,7 +142,7 @@ namespace EnterpriseWPF.ViewModels
             connectionSettingsView.ShowDialog();
         }
 
-        
+
 
     }
 }

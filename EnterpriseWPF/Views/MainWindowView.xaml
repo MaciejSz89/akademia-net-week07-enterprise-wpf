@@ -92,7 +92,7 @@
                                         Binding="{Binding IsHired}" 
                                         Width="Auto"/>
                 <DataGridTextColumn Header="Data zwolnienia" 
-                                    Binding="{Binding DismissalDate}" 
+                                    Binding="{Binding DismissalDate, StringFormat='dd MMM yyyy', ConverterCulture='pl-PL'}" 
                                     Width="Auto">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">

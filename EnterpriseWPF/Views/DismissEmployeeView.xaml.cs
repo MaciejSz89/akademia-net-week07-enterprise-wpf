@@ -1,4 +1,5 @@
-﻿using EnterpriseWPF.ViewModels;
+﻿using EnterpriseWPF.Models.Wrappers;
+using EnterpriseWPF.ViewModels;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,10 @@ namespace EnterpriseWPF.Views
     /// </summary>
     public partial class DismissEmployeeView : MetroWindow
     {
-        public DismissEmployeeView()
+        public DismissEmployeeView(EmployeeWrapper employee)
         {
             InitializeComponent();
-            DataContext = new DismissEmployeeViewModel();
+            DataContext = new DismissEmployeeViewModel(employee);
         }
     }
 }

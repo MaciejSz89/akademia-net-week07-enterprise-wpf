@@ -80,7 +80,7 @@
         <DatePicker Grid.Row="5" 
                     Grid.Column="1" 
                     Margin="5" 
-                    Text="{Binding Employee.HireDate}"/>
+                    SelectedDate="{Binding Employee.HireDate}"/>
 
         <Label Grid.Row="6" 
                Margin="5" 
@@ -89,7 +89,7 @@
         <DatePicker Grid.Row="6" 
                     Grid.Column="1" 
                     Margin="5" 
-                    Text="{Binding Employee.DismissalDate}"
+                    SelectedDate="{Binding Employee.DismissalDate}"
                     Visibility="{Binding Employee.IsHired, Converter={StaticResource inverseBooleanToVisibilityConverter}}"/>
 
         <CheckBox Grid.Row="7" 

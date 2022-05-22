@@ -19,12 +19,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Margin="5" Content="Data zwolnienia"/>
-        <DatePicker Margin="5" Grid.Column="1"/>
+        <Label Margin="5" 
+               Content="Data zwolnienia"/>
+        <DatePicker Margin="5" 
+                    Grid.Column="1" 
+                    SelectedDate="{Binding DismissalDate}"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <Button Margin="5" Content="Zatwierdź" Width="100"/>
-            <Button Margin="5" Content="Anuluj" Width="100"/>
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1" 
+                    Orientation="Horizontal">
+            <Button Margin="5" 
+                    Content="Zatwierdź" 
+                    Width="100" 
+                    Command="{Binding ConfirmCommand}" 
+                    CommandParameter="{Binding ElementName=DismissalWindow}"/>
+            <Button Margin="5" 
+                    Content="Anuluj" 
+                    Width="100" 
+                    Command="{Binding CancelCommand}" 
+                    CommandParameter="{Binding ElementName=DismissalWindow}"/>
         </StackPanel>
         
     </Grid>
