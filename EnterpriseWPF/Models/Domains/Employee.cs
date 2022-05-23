@@ -16,9 +16,7 @@ namespace EnterpriseWPF.Models.Domains
         [Column(TypeName = "money")]
         public decimal Salary { get; set; }
 
-        [Column(TypeName= "date")]
         public DateTime HireDate { get; set; } = DateTime.Now;
-        [Column(TypeName = "date")]
         public DateTime? DismissalDate { get; set; }
         public string Comments { get; set; }
         public bool IsHired { get; set; } = true;
