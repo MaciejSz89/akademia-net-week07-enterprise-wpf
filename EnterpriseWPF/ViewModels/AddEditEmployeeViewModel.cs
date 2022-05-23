@@ -29,11 +29,15 @@ namespace EnterpriseWPF.ViewModels
             }
 
             IsHiredChangedCommand = new RelayCommand(IsHiredChanged, CanEmploymentStatusChange);
-            ConfirmCommand = new RelayCommand(Confirm);
+            ConfirmCommand = new RelayCommand(Confirm, CanConfirm);
             CancelCommand = new RelayCommand(Cancel);
 
         }
 
+        private bool CanConfirm(object obj)
+        {
+            return Employee.IsValid;
+        }
 
         public ICommand IsHiredChangedCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
