@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:main="clr-namespace:EnterpriseWPF" 
         xmlns:local="clr-namespace:EnterpriseWPF.Views"        
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -95,8 +96,11 @@
         <DatePicker Grid.Row="6" 
                     Grid.Column="1" 
                     Margin="5" 
-                    SelectedDate="{Binding Employee.DismissalDate}"
-                    Visibility="{Binding Employee.IsHired, Converter={StaticResource inverseBooleanToVisibilityConverter}}"/>
+                    SelectedDate="{Binding Employee.DismissalDate,
+                                            UpdateSourceTrigger=PropertyChanged, 
+                                            ValidatesOnDataErrors=True}"
+                    Visibility="{Binding Employee.IsHired, 
+                                        Converter={StaticResource inverseBooleanToVisibilityConverter}}"/>
 
         <CheckBox Grid.Row="7" 
                   Grid.Column="1" 
@@ -104,7 +108,10 @@
                   Content="Zatrudniony" 
                   IsChecked="{Binding Employee.IsHired}"
                   Name="IsHiredCheckBox"
-                  Command="{Binding IsHiredChangedCommand}"/>
+                  Command="{Binding IsHiredChangedCommand}"
+                  CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+
+
 
         <StackPanel Grid.Row="8" 
                     Grid.Column="1" 

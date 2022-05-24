@@ -11,9 +11,11 @@ namespace EnterpriseWPF
         public ApplicationDbContext()
             : base(_connectionString)
         {
-            
+
         }
         private static string _connectionString = new ConnectionSettings().ConnectionString;
+
+
 
         public DbSet<Employee> Employees { get; set; }
 

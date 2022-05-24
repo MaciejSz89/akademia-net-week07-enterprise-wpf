@@ -53,21 +53,5 @@ namespace EnterpriseWPF
             }
         }
 
-        public void DismissEmployee(EmployeeWrapper employee, DateTime dismissalDate)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-
-                var employeeToDismiss = context.Employees.Find(employee.Id);
-
-                if (dismissalDate < employeeToDismiss.HireDate)
-                    throw new ArgumentException("Data zwolnienia pracownika jest wcześniejsza niż data jego zatrudnienia");
-
-                employeeToDismiss.IsHired = false;
-                employeeToDismiss.DismissalDate = dismissalDate;
-
-                context.SaveChanges();
-            }
-        }
     }
 }

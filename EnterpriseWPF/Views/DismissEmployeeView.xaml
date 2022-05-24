@@ -23,7 +23,9 @@
                Content="Data zwolnienia"/>
         <DatePicker Margin="5" 
                     Grid.Column="1" 
-                    SelectedDate="{Binding DismissalDate}"/>
+                    SelectedDate="{Binding Employee.DismissalDate,
+                            UpdateSourceTrigger=PropertyChanged, 
+                            ValidatesOnDataErrors=True}"/>
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="1" 

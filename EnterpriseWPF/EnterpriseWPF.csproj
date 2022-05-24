@@ -97,6 +97,14 @@
     <Compile Include="Migrations\202205182204048_EmployeesSalaryColumnNameChanged.designer.cs">
       <DependentUpon>202205182204048_EmployeesSalaryColumnNameChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205241927488_EmployeesColumnHireDateChangedFromDateTimeToDate.cs" />
+    <Compile Include="Migrations\202205241927488_EmployeesColumnHireDateChangedFromDateTimeToDate.designer.cs">
+      <DependentUpon>202205241927488_EmployeesColumnHireDateChangedFromDateTimeToDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205241930022_EmployeesColumnDismissalDateChangedFromDateTimeToDate.cs" />
+    <Compile Include="Migrations\202205241930022_EmployeesColumnDismissalDateChangedFromDateTimeToDate.designer.cs">
+      <DependentUpon>202205241930022_EmployeesColumnDismissalDateChangedFromDateTimeToDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\EmployeeConfiguration.cs" />
     <Compile Include="Models\Converters\EmployeeConverter.cs" />
@@ -149,6 +157,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205182204048_EmployeesSalaryColumnNameChanged.resx">
       <DependentUpon>202205182204048_EmployeesSalaryColumnNameChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241927488_EmployeesColumnHireDateChangedFromDateTimeToDate.resx">
+      <DependentUpon>202205241927488_EmployeesColumnHireDateChangedFromDateTimeToDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241930022_EmployeesColumnDismissalDateChangedFromDateTimeToDate.resx">
+      <DependentUpon>202205241930022_EmployeesColumnDismissalDateChangedFromDateTimeToDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

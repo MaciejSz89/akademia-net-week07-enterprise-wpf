@@ -19,7 +19,7 @@ namespace EnterpriseWPF.ViewModels
                 Employee = new EmployeeWrapper
                 {
                     HireDate = DateTime.Now,
-                    IsHired = true                    
+                    IsHired = true
                 };
             }
             else
@@ -27,6 +27,8 @@ namespace EnterpriseWPF.ViewModels
                 Employee = employee;
                 IsUpdate = true;
             }
+
+            _canBeDissmissed = Employee.IsHired;
 
             IsHiredChangedCommand = new RelayCommand(IsHiredChanged, CanEmploymentStatusChange);
             ConfirmCommand = new RelayCommand(Confirm, CanConfirm);
@@ -60,6 +62,7 @@ namespace EnterpriseWPF.ViewModels
             }
         }
 
+
         private bool _isUpdate;
 
         public bool IsUpdate
@@ -77,18 +80,20 @@ namespace EnterpriseWPF.ViewModels
 
         private bool CanEmploymentStatusChange(object obj)
         {
-            return Employee.IsHired;
+            return _canBeDissmissed;
         }
 
         private void IsHiredChanged(object obj)
         {
             if (!Employee.IsHired)
             {
+                _canBeDissmissed = false;
                 Employee.DismissalDate = DateTime.Now;
                 OnPropertyChanged(nameof(Employee));
             }
         }
-
+        private bool _canBeDissmissed;
+        
 
         private void Cancel(object obj)
         {
@@ -103,7 +108,7 @@ namespace EnterpriseWPF.ViewModels
 
         private void Confirm(object obj)
         {
-            if(!IsUpdate)
+            if (!IsUpdate)
             {
                 _repository.AddEmployee(Employee);
             }

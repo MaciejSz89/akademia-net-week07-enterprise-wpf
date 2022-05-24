@@ -20,6 +20,7 @@ namespace EnterpriseWPF
 
         public string ConnectionString
         {
+            //get { return $@"Server=(local)\KURSNETSQLSRV;Database=Enterprise;User Id=user2;Password=haslo;"; ; }
             get { return $@"Server={ServerAddress}\{ServerName};Database={DatabaseName};User Id={UserId};Password={Password};"; ; }
         }
 

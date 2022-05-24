@@ -1,5 +1,7 @@
 ﻿using EnterpriseWPF.Commands;
 using EnterpriseWPF.Models.Wrappers;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,17 @@ namespace EnterpriseWPF.ViewModels
     {
 
         public DismissEmployeeViewModel(EmployeeWrapper employee)
-        {
+        {       
+            employee.IsHired = false;
+            employee.DismissalDate = DateTime.Now;
             Employee = employee;
-            DismissalDate = DateTime.Now;
-            ConfirmCommand = new RelayCommand(Confirm);
+            ConfirmCommand = new RelayCommand(Confirm, CanConfirm);
             CancelCommand = new RelayCommand(Cancel);
+        }
+
+        private bool CanConfirm(object obj)
+        {
+            return Employee.IsDismissalDateValid;
         }
 
         public ICommand ConfirmCommand { get; set; }
@@ -26,20 +34,7 @@ namespace EnterpriseWPF.ViewModels
 
         private Repository _repository = new Repository();
 
-        private DateTime _dismissalDate;
 
-        public DateTime DismissalDate
-        {
-            get
-            {
-                return _dismissalDate;
-            }
-            set
-            {
-                _dismissalDate = value;
-                OnPropertyChanged();
-            }
-        }
 
 
         private EmployeeWrapper _employee;
@@ -65,9 +60,9 @@ namespace EnterpriseWPF.ViewModels
 
         private void Confirm(object obj)
         {
-            _repository.DismissEmployee(Employee, DismissalDate);
+            _repository.UpdateEmployee(Employee);
 
-            var window = obj as Window;
+            var window = obj as MetroWindow;
             CloseWindow(window);
         }
 
