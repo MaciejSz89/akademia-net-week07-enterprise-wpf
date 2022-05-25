@@ -69,6 +69,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,7 @@
     </Compile>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
+    <Compile Include="UserData.cs" />
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Migrations\202205182143483_InitialCreate.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="ViewModels\AddEditEmployeeViewModel.cs" />
     <Compile Include="ViewModels\ConnectionSettingsViewModel.cs" />
     <Compile Include="ViewModels\DismissEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\AddEditEmployeeView.xaml.cs">
       <DependentUpon>AddEditEmployeeView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
     </Compile>
     <Compile Include="Views\DismissEmployeeView.xaml.cs">
       <DependentUpon>DismissEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>

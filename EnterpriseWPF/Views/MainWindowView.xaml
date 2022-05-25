@@ -17,6 +17,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu>
@@ -35,12 +36,21 @@
                           Command="{Binding ConnectionSettingsCommand}"/>
             </MenuItem>
         </Menu>
-        <DataGrid Grid.Row="1" 
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="Filtr:"
+                   Margin="5"/>
+            <ComboBox   
+                Width="150"
+                Margin="5"
+                ItemsSource="{Binding IsHiredFilters}"
+                SelectedIndex="{Binding SelectedIsHiredFilter}"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" 
                   ItemsSource="{Binding Employees}"   
                   AutoGenerateColumns="False"   
                   IsReadOnly="True"   
                   SelectionMode="Single"   
-                  SelectedItem="{Binding SelectedEmployee}" >  
+                  SelectedItem="{Binding SelectedEmployee}" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Zatrudnienie nowego pracownika" 
@@ -104,8 +114,8 @@
                                     Binding="{Binding Comments}" 
                                     Width="*"/>
             </DataGrid.Columns>
-            
-            
+
+
         </DataGrid>
     </Grid>
 </mah:MetroWindow>

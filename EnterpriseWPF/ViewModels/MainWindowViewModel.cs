@@ -22,11 +22,13 @@ namespace EnterpriseWPF.ViewModels
         public MainWindowViewModel()
         {
             _connectionSettings = new ConnectionSettings();
+            InitIsHiredFilter();
             LoadedWindowCommand = new RelayCommand(LoadedWindow);
             AddEmployeeCommand = new RelayCommand(AddEditEmployee);
             EditEmployeeCommand = new RelayCommand(AddEditEmployee, CanEditEmployee);
             DismissEmployeeCommand = new RelayCommand(DismissEmployee, CanDismissEmployee);
             ConnectionSettingsCommand = new RelayCommand(ConnectionSettings);
+            RefreshData();
         }
 
 
@@ -37,6 +39,38 @@ namespace EnterpriseWPF.ViewModels
 
         private EmployeeWrapper _selectedEmployee;
         private Repository _repository = new Repository();
+
+        private ObservableCollection<string> _isHiredFilter;
+        public ObservableCollection<string> IsHiredFilters
+        {
+            get
+            {
+                return _isHiredFilter;
+            }
+            set
+            {
+                _isHiredFilter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public enum IsHiredFilterValues { Wszyscy, Zatrudnieni, Zwolnieni };
+
+        private int _selectedIsHiredFilter;
+        public int SelectedIsHiredFilter
+        {
+            get
+            {
+                return _selectedIsHiredFilter;
+            }
+            set
+            {
+                _selectedIsHiredFilter = value;
+                RefreshData();
+                OnPropertyChanged();
+            }
+        }
+
 
         public EmployeeWrapper SelectedEmployee
         {
@@ -83,7 +117,26 @@ namespace EnterpriseWPF.ViewModels
         {
             using (var dataContext = new ApplicationDbContext())
             {
-                Employees = new ObservableCollection<EmployeeWrapper>(_repository.GetEmployees());
+                var allEmployees = _repository.GetEmployees();
+
+                var filteredEmployees = FilterByIsHired(allEmployees);
+
+                Employees = new ObservableCollection<EmployeeWrapper>(filteredEmployees);
+            }
+        }
+
+        private List<EmployeeWrapper> FilterByIsHired(List<EmployeeWrapper> employees)
+        {
+            switch (SelectedIsHiredFilter)
+            {
+                case (int)IsHiredFilterValues.Wszyscy:
+                    return employees;
+                case (int)IsHiredFilterValues.Zatrudnieni:
+                    return employees.Where(x => x.IsHired).ToList();
+                case (int)IsHiredFilterValues.Zwolnieni:
+                    return employees.Where(x => !x.IsHired).ToList();
+                default:
+                    return new List<EmployeeWrapper>();
             }
         }
 
@@ -142,7 +195,16 @@ namespace EnterpriseWPF.ViewModels
             connectionSettingsView.ShowDialog();
         }
 
-
+        private void InitIsHiredFilter()
+        {
+            IsHiredFilters = new ObservableCollection<string>();
+            var filters = Enum.GetValues(typeof(IsHiredFilterValues));
+            foreach (var filter in filters)
+            {
+                IsHiredFilters.Add(filter.ToString());
+            }
+            SelectedIsHiredFilter = (int)IsHiredFilterValues.Wszyscy;
+        }
 
     }
 }

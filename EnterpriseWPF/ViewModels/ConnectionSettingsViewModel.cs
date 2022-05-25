@@ -15,6 +15,15 @@ namespace EnterpriseWPF.ViewModels
 {
     public class ConnectionSettingsViewModel : ViewModelBase
     {
+        public ConnectionSettingsViewModel(bool canCloseWindow)
+        {
+
+            ConnectionSettings = new ConnectionSettings();
+
+            ConfirmCommand = new AsyncRelayCommand(Confirm, CanConfirm);
+            CloseCommand = new RelayCommand(Close);
+            _canCloseWindow = canCloseWindow;
+        }
 
         private ConnectionSettings _connectionSettings;
         private readonly bool _canCloseWindow;
@@ -27,16 +36,6 @@ namespace EnterpriseWPF.ViewModels
                 _connectionSettings = value;
                 OnPropertyChanged();
             }
-        }
-
-        public ConnectionSettingsViewModel(bool canCloseWindow)
-        {
-
-            ConnectionSettings = new ConnectionSettings();
-
-            ConfirmCommand = new AsyncRelayCommand(Confirm, CanConfirm);
-            CloseCommand = new RelayCommand(Close);
-            _canCloseWindow = canCloseWindow;
         }
 
         private bool CanConfirm(object arg)

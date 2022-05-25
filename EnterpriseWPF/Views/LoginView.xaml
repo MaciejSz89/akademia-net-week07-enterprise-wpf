@@ -1,0 +1,58 @@
+﻿<mah:MetroWindow  x:Class="EnterpriseWPF.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"      
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:parent="clr-namespace:EnterpriseWPF" 
+        xmlns:local="clr-namespace:EnterpriseWPF.Views"         
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Name="LoginWindow"
+        Title="Logowanie" Height="150" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Login:"
+               Margin="5"/>
+        <TextBox Grid.Column="1" 
+                 Text="{Binding UserData.Login,        
+                 UpdateSourceTrigger=PropertyChanged,                                            
+                 ValidatesOnDataErrors=True}"
+                 Margin="5"/>
+
+        <Label Grid.Row="1" Content="Password:"
+               Margin="5"/>
+        <PasswordBox   parent:PasswordHelper.Attach="True" 
+                        parent:PasswordHelper.Password="{Binding UserData.Password,                                              
+                        Mode=TwoWay,                                             
+                        UpdateSourceTrigger=PropertyChanged,                                            
+                        ValidatesOnDataErrors=True}"                                             
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Margin="5"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
+            <Button 
+                Command="{Binding CloseCommand}"                
+                Content="Anuluj" 
+                Height="25" 
+                Width="100" 
+                Margin="5"/>
+            <Button 
+                Command="{Binding ConfirmCommand}"
+                CommandParameter="{Binding ElementName=LoginWindow}"
+                Content="Zatwierdź" 
+                Height="25" 
+                Width="100" 
+                Margin="5"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

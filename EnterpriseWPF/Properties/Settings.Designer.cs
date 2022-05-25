@@ -94,5 +94,23 @@ namespace EnterpriseWPF.Properties {
                 this["Password"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        public string UserDataLogin {
+            get {
+                return ((string)(this["UserDataLogin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        public string UserDataPassword {
+            get {
+                return ((string)(this["UserDataPassword"]));
+            }
+        }
     }
 }
